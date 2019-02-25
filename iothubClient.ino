@@ -2,6 +2,7 @@ static WiFiClientSecure sslClient; // for ESP8266
 
 const char *onSuccess = "\"Successfully invoke device method\"";
 const char *notFound = "\"No method found\"";
+const char *GitHubLink = "\"github.com/ollebollebagare/BigDatainlupp1\"";
 
 static void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void *userContextCallback)
 {
@@ -59,13 +60,6 @@ void stop()
     messageSending = false;
 }
 
-void github()
-{
-  Serial.println("DirectMethod::  Calling GitHub link");
-  Serial.println("");
-  Serial.println("https://github.com/ollebollebagare/BigData-inlupp1.git");
-}
-
 IOTHUBMESSAGE_DISPOSITION_RESULT receiveMessageCallback(IOTHUB_MESSAGE_HANDLE message, void *userContextCallback)
 {
     IOTHUBMESSAGE_DISPOSITION_RESULT result;
@@ -116,9 +110,10 @@ int deviceMethodCallback(
     {
         stop();
     }
-    else if (strcmp(methodName, "github ") == 0)
+    else if (strcmp(methodName, "github") == 0)
     {
-        github ();
+      Serial.println("DirectMethod::  Githublink sent");
+      responseMessage = GitHubLink;
     }
     else
     {
